@@ -1,0 +1,47 @@
+﻿@model CarUpsertDTO
+@{ 
+    ViewData["Title"] = "Add new car";
+}
+
+<div>
+    <form asp-action="Add" asp-controller="Upload" method="post">
+        <div>
+            <label asp-for="Make"></label>
+            <input asp-for="Make" />
+            <span asp-validation-for="Make"></span>
+        </div>
+        <div>
+            <label asp-for="Model"></label>
+            <input asp-for="Model" />
+            <span asp-validation-for="Model"></span>
+        </div>
+        <div>
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+            <span asp-validation-for="Price"></span>
+        </div>
+        <div>
+            <label asp-for="Year"></label>
+            <input asp-for="Year" />
+            <span asp-validation-for="Year"></span>
+        </div>
+        <div>
+            <label asp-for="Description"></label>
+            <input asp-for="Description" />
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div>
+            <label asp-for="Mileage"></label>
+            <input asp-for="Mileage" />
+            <span asp-validation-for="Mileage"></span>
+        </div>
+        <div>
+            <label asp-for="Photos"></label>
+            <input asp-for="Photos" />
+            <span asp-validation-for="Photos"></span>
+        </div>
+
+        <div asp-validation-summary="All"></div>
+        <input type="submit" value="Add" class="btn btn-success" />
+    </form>
+</div> 

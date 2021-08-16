@@ -1,0 +1,19 @@
+﻿@model DeleteCarModel
+@{ 
+    ViewData["Title"] = "Delete car";
+}
+
+<form asp-action="Delete" asp-controller="Upload" method="post">
+    <div>
+        <label asp-for="CarId"></label>
+        <input asp-for="CarId" />
+        <span asp-validation-for="CarId"></span>
+    </div>
+    <div>
+        <label asp-for="ConfirmCarId"></label>
+        <input asp-for="ConfirmCarId" />
+        <span asp-validation-for="ConfirmCarId"></span>
+    </div>
+    <div asp-validation-summary="All"></div>
+    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Wanna delete?')"/>
+</form>

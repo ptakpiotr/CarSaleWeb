@@ -1,0 +1,59 @@
+﻿@model CarReadDTO 
+@{ 
+    ViewData["Title"] = $"{Model.Make} {Model.Model} {Model.Year}";
+} 
+
+<div>
+    <img class="img-fluid" src="@Model.Photos.First()" alt="Car Photo" />
+    <h3 class="display-3">@Model.Make @Model.Model</h3>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                Year:<b>@Model.Year </b> |
+            </div>
+            <div class="column">
+                Price:<b>@Model.Price PLN </b> |
+            </div>
+            <div class="column">
+                Mileage:<b>@Model.Mileage km </b>
+            </div>
+        </div>
+        <div class="row">
+            @if (ViewData["UserEmail"]!=null)
+            {
+            <div class="column">
+                <partial name="_UserInfoPartial" model="@ViewData["UserEmail"]" />
+            </div>
+            }
+        </div>
+    </div>
+    <hr />
+    <h4 class="display-4">Description:</h4>
+    <div>
+        @Model.Description
+    </div>
+    <hr />
+    <h4 class="display-4">Photos:</h4>
+    <div>
+        @foreach (var photo in Model.Photos)
+        {
+            <img class="img-fluid" style="width:300px" src="@photo" alt="Car Photo" />
+        }
+    </div>
+    <h4 class="display-4">Tags:</h4>
+    <div>
+        <a asp-action="CarsByMake" asp-route-make="@Model.Make" class="btn btn-outline-danger">@Model.Make</a>
+        <a asp-action="CarsByModel" asp-route-model="@Model.Model" class="btn btn-outline-danger">@Model.Model</a>
+    </div>
+    @if (User.Identity.IsAuthenticated && ViewData["UserEmail"].ToString()==User.Identity.Name.ToString())
+    {
+        <hr />
+        <h4 class="display-4">Edit:</h4>
+        <div>
+            <a asp-action="Edit" asp-controller="Upload" asp-route-editId="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Delete" asp-controller="Upload" asp-route-deleteId="@Model.Id" class="btn btn-danger">Delete</a>
+
+        </div>
+    }
+</div>

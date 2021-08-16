@@ -1,0 +1,34 @@
+﻿@model List<CarReadDTO>
+@{
+    ViewData["Title"] = "CarSale Home";
+}
+
+<div class="text-center">
+    <h1 class="display-3">Welcome to CarSale!</h1>
+    <h3>See the latest car offers:</h3>
+    @if (Model.Any())
+    {
+        <div class="container">
+                @foreach (var car in Model)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            @car.Make @car.Model
+                        </div>
+                        <div class="card-body">
+                            <img src="@car.Photos.First()" alt="Offer photo" class="img-fluid" />
+                            <br />
+                            <p>Price: @car.Price PLN</p>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-action="CarInfo" asp-route-id="@car.Id" class="btn btn-success">Read more...</a>
+                        </div>
+                    </div>
+                }
+        </div>
+    }
+    else
+    {
+        <div>No cars in database</div>
+    }
+</div>

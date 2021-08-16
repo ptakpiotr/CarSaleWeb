@@ -1,0 +1,38 @@
+﻿@model LoginUserDTO
+
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> signInManager
+
+@{
+    ViewData["Title"] = "Login new user";
+}
+
+<form asp-action="Login" asp-controller="Account" method="post">
+    <div class="input-group-prepend">
+        <label class="input-group-text mr-2" asp-for="Email"></label>
+        <input class="form-control-sm" asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="input-group-prepend">
+        <label class="input-group-text mr-2" asp-for="Password"></label>
+        <input class="form-control-sm" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="input-group-prepend">
+        <label class="input-group-text mr-2" asp-for="RememberMe"></label>
+        <input class="form-control-sm" asp-for="RememberMe" />
+        <span asp-validation-for="RememberMe"></span>
+    </div>
+    <div asp-validation-summary="All"></div>
+
+    <input type="submit" value="Login" class="btn btn-success" />
+</form>
+<hr />
+<a asp-action="ForgotPassword" asp-controller="Account">Forgot password</a>
+
+<form asp-action="ExternalLogin" method="post">
+    @foreach(var provider in (await signInManager.GetExternalAuthenticationSchemesAsync()))
+    {
+        <button name="provider" value="@provider.Name" title="@provider.DisplayName">@provider.DisplayName</button>
+    }
+</form>
